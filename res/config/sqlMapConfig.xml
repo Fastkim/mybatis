@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- mybatis 환경설정 -->
+ <!DOCTYPE configuration PUBLIC './/mybatis.org/DTD config 3.0//EN'
+ 	'http://mybatis.org/dtd/mybatis-3-config.dtd'>
+<configuration> <!-- 루트 태그 -->
+	<properties resource='config/jdbc.properties'>  <!-- xml에서는 패키지구분을 /로 함 --> 
+		<property name='driver' value='oracle.jdbc.driver.OracleDriver'/>
+	</properties>
+	
+	<typeAliases> <!-- 긴 클래스명()에 별명 붙여줄수있음 -->
+		<typeAlias type='ch02.domain.User' alias='user'/>
+	</typeAliases>
+	
+	<environments default='development'> <!--  접속환경 default : 기본 id이름 -->
+		<environment id='development'> <!-- 접속환경마다 id를 붙여서 구분한다. -->
+			<transactionManager type='JDBC'/>
+			<dataSource type='POOLED'> <!-- POOLED : connection을 n개를 미리 만들고 돌아가면서 씀, 즉 접속할때의 대기시간을 줄일수있음 -->
+				<property name='driver' value='${driver}'/> <!-- expression language(el) , ${driver} : oracle.jdbc.driver.OracleDriver -->
+				<property name='url' value='${url}'/>
+				<property name='username' value='${username}'/>
+				<property name='password' value='${password}'/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers> <!--or mapping에 관련된 내용을 기술 -->
+		<mapper resource='ch02/ex01/sqlMap.xml'/>
+	</mappers>
+</configuration>
