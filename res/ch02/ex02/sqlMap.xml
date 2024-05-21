@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'> <!-- 루트 이름 -->
+<mapper namespace='ch02.ex02.Map'>
+	<select id='selectUser' resultMap='userMap'> <!--  resultType = ch02.domain.user -->
+		select user_id, user_name, reg_date
+		from users
+		where user_id = #{userId}
+	</select> <!--  쿼리를 포함한다 하면 select 태그 -->
+	
+	<select id='selectUser2' resultMap='userMap'>
+		select user_id, user_name, reg_date
+		from users
+		where user_name = #{userName}
+	</select>
+	
+	<select id='selectUser3' resultMap='userMap'>
+		select user_id, user_name, reg_date
+		from users
+		where reg_date = #{regDate}
+	</select>
+	
+	<resultMap id='userMap' type='user'> <!--  object은 resultMap 태그에서 준비  -->
+		<id property='userId' column='user_id'/> <!--  id property : pk를 의미 -->
+		<result property='userName' column='user_name'/> <!-- result property pk가 아닌 다른것들 -->
+		<result property='regDate' column='reg_date'/>
+	</resultMap>
+</mapper>

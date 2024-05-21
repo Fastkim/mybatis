@@ -5,7 +5,7 @@ import java.sql.Date;
 public class User {
 	private int userId;
 	private String userName;
-	private Date regDate; // jdbc 시절에는 localdate가 없었으므로 Date 타입으로.
+	private Date regDate; // jdbc 시절에는 localDate가 없었으므로 Date 타입으로.
 	
 	public int getUserId() {
 		return userId;

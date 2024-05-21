@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'> <!-- 루트 이름 -->
+<mapper namespace='ch02.ex03.Map'>
+	<insert id='insertUser'>
+		insert into users values(
+			#{userId, jdbcType=NUMERIC}, <!--  POJO의 필드네임과 변수명이 동일해야한다. -->
+			#{userName, jdbcType=VARCHAR},
+			#{regDate, jdbcType=DATE}) <!--  jdbcType = 변수값이 null이더라도 에러없이 잘 처리된다. -->
+	</insert>
+	
+	<insert id='insertUser2'>
+		insert into users values(
+			#{userId},
+			#{userName},
+			#{regDate}
+		)
+	</insert>
+	
+	<insert id='insertUser3'>
+		insert into users values(
+			#{param1},
+			#{param2},
+			#{param3}
+		)
+	</insert>
+</mapper>

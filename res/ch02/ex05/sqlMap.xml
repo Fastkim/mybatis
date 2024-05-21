@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'> <!-- 루트 이름 -->
+<mapper namespace='ch02.ex05.Map'>
+	<delete id='deleteUser'>
+		delete users
+		where user_id >= #{userId} <!-- 파라미터가 하나이므로 메서드 파라미터와 이름이 동일하지않아도됨 -->
+	</delete>
+</mapper>

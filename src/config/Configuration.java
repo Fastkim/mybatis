@@ -13,6 +13,12 @@ public class Configuration {
 		try {
 			Reader reader = Resources.getResourceAsReader("config/sqlMapConfig.xml"); // reader 객체가 환경설정을 파악
 			sqlSessionFactory  = new SqlSessionFactoryBuilder().build(reader); // conn : 물리적인관점, session : 논리적인관점. 1개의 conncection의 n개의 session 가능
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public static <T> T getMapper(Class<T> arg) {
+		return sqlSessionFactory.openSession(true).getMapper(arg);
 	}
 }

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'> <!-- 루트 이름 -->
+<mapper namespace='ch05.ex01.Map'>
+	<select id='selectUser' resultMap='userMap'>
+		select users.user_id, user_name, reg_date, post_title, post_content
+		from users join posts
+		on users.user_id = posts.user_id
+		where users.user_name = #{userName}
+		<if test='post != null and post.title != null'>
+			and post_title like '%' || #{post.title} || '%' <!--  변수 post.title은 search객체의 post필드.title이다. -->
+		</if>
+		<if test='post != null and !post.content.isEmpty()'> <!--  post.content가 null일경우 nullpointException 발생 -->
+			and post_content like '%' || #{post.content} || '%'
+		</if> 
+		<!-- 위의 if는 서로 배타적이지 않다. -->
+	</select>
+	
+	<resultMap id='userMap' type='ch05.domain.User'>
+		<id property='userId' column='user_id'/>
+		<result property='userName' column='user_name'/>
+		<result property='regDate' column='reg_date'/>
+		<collection property='posts' ofType='ch05.domain.Post'>
+			<result property='title' column='post_title'/>
+			<result property='content' column='post_content'/>
+		</collection>
+	</resultMap>
+</mapper>
+
+<!-- mybatis : persistence Framework, sql mapping Framework, OR mapping Framework 
+	 hibernate : sql 요청도 스스로 하는 프레임워크-->
